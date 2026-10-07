@@ -1,0 +1,39 @@
+{
+    "schemaVersion": 1,
+    "id": "${mod_id}",
+    "version": "${minecraft_version}-${version}-fabric",
+    "name": "${mod_name}",
+    "description": "${description}",
+    "authors": [
+        "${mod_author}"
+    ],
+    "contact": {
+    },
+    "license": "${license}",
+    "icon": "assets/${mod_id}/${mod_id}.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "com.omuraisu.entityscalecore.EntityScaleCore"
+        ],
+        "modmenu": [
+            "com.omuraisu.entityscalecore.fabric.EntityScaleCoreModMenu"
+        ]
+    },
+    "mixins": [
+        "${mod_id}.mixins.json",
+        "${mod_id}.fabric.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.14",
+        "fabric": "*",
+        "minecraft": ">=1.20",
+        "java": ">=17"
+    },
+    "suggests": {
+        "another-mod": "*",
+        "modmenu": ">=7.0.0",
+        "cloth-config": ">=11.0.0"
+    }
+}
+  

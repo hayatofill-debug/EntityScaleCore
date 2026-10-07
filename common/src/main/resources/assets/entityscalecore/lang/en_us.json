@@ -1,0 +1,30 @@
+{
+  "modmenu.nameTranslation.entityscalecore": "EntityScaleCore",
+  "modmenu.descriptionTranslation.entityscalecore": "A difficulty scaling mod that changes mob strength based on distance, days, depth, and areas.",
+
+  "config.entityscalecore.title": "EntityScaleCore Config",
+
+  "config.entityscalecore.category.distance": "Distance",
+  "config.entityscalecore.distance.enabled": "Distance Scaling",
+  "config.entityscalecore.distance.start": "Starting Distance",
+  "config.entityscalecore.distance.blocks_per_level": "Blocks per Level",
+  "config.entityscalecore.distance.bonus_per_level": "Bonus per Level",
+  "config.entityscalecore.distance.max_bonus": "Maximum Bonus",
+  "config.entityscalecore.distance.y_weight": "Y Weight",
+
+  "config.entityscalecore.category.depth": "Depth",
+  "config.entityscalecore.depth.enabled": "Depth Scaling",
+  "config.entityscalecore.depth.bonus_per_block": "Bonus per Block",
+  "config.entityscalecore.depth.max_bonus": "Maximum Bonus",
+
+  "config.entityscalecore.category.day": "Days",
+  "config.entityscalecore.day.bonus_per_day": "Bonus per Day",
+  "config.entityscalecore.day.max_enabled": "Enable Maximum Bonus",
+  "config.entityscalecore.day.max_bonus": "Maximum Bonus",
+
+  "config.entityscalecore.category.elite": "Elite",
+  "config.entityscalecore.elite.name_color_enabled": "Enable Elite Name Color",
+  "config.entityscalecore.elite.name_color": "Elite Name Color",
+
+  "entity.entityscalecore.elite": "Strengthened %s"
+}

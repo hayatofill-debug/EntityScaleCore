@@ -1,0 +1,32 @@
+{
+  "modmenu.nameTranslation.entityscalecore": "EntityScaleCore",
+  "modmenu.descriptionTranslation.entityscalecore": "距離・日数・深さ・エリアなどに応じてMobの強さを変化させる難易度スケーリングMODです。",
+  "mod.entityscalecore.description": "距離・日数・深さ・エリアなどに応じてMobの強さを変化させる難易度スケーリングMODです。",
+  "${description}": "距離・日数・深さ・エリアなどに応じてMobの強さを変化させる難易度スケーリングMODです。",
+
+  "config.entityscalecore.title": "EntityScaleCore 設定",
+
+  "config.entityscalecore.category.distance": "距離設定",
+  "config.entityscalecore.distance.enabled": "距離による強化",
+  "config.entityscalecore.distance.start": "強化開始距離",
+  "config.entityscalecore.distance.blocks_per_level": "1段階あたりの距離",
+  "config.entityscalecore.distance.bonus_per_level": "1段階あたりの倍率",
+  "config.entityscalecore.distance.max_bonus": "最大ボーナス",
+  "config.entityscalecore.distance.y_weight": "Y方向の重み",
+
+  "config.entityscalecore.category.depth": "深さ設定",
+  "config.entityscalecore.depth.enabled": "深さによる強化",
+  "config.entityscalecore.depth.bonus_per_block": "1ブロックあたりの倍率",
+  "config.entityscalecore.depth.max_bonus": "最大ボーナス",
+
+  "config.entityscalecore.category.day": "日数設定",
+  "config.entityscalecore.day.bonus_per_day": "1日あたりの倍率",
+  "config.entityscalecore.day.max_enabled": "最大ボーナスを有効化",
+  "config.entityscalecore.day.max_bonus": "最大ボーナス",
+
+  "config.entityscalecore.category.elite": "強化Mob設定",
+  "config.entityscalecore.elite.name_color_enabled": "強化Mobの名前色を有効化",
+  "config.entityscalecore.elite.name_color": "強化Mobの名前色",
+
+  "entity.entityscalecore.elite": "強化された%s"
+}
