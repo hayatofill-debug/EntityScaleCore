@@ -2,6 +2,8 @@ package com.omuraisu.entityscalecore.config;
 
 public class ScalingConfig {
 
+    public boolean enableLoadingLog = true;
+
     public boolean distanceEnabled = true;
 
     public double distanceStart = 1000.0;

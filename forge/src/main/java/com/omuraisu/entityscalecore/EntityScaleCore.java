@@ -2,6 +2,7 @@ package com.omuraisu.entityscalecore;
 
 import com.omuraisu.entityscalecore.api.MobScaleContext;
 import com.omuraisu.entityscalecore.api.MobScaleResult;
+import com.omuraisu.entityscalecore.command.CommandManager;
 import com.omuraisu.entityscalecore.config.ScalingConfig;
 import com.omuraisu.entityscalecore.config.ScalingConfigManager;
 import com.omuraisu.entityscalecore.dimension.OriginManager;
@@ -12,6 +13,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Mob;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -56,8 +58,6 @@ public class EntityScaleCore {
         return config;
     }
 
-    // --- MOD初期化イベント ---
-
     private void onClientSetup(final FMLClientSetupEvent event) {
         ModLoadingContext.get().registerExtensionPoint(
                 ConfigScreenHandler.ConfigScreenFactory.class,
@@ -66,8 +66,6 @@ public class EntityScaleCore {
                 )
         );
     }
-
-    // --- ゲーム内イベント ---
 
     @SubscribeEvent
     public void onServerStarted(ServerStartedEvent event) {
@@ -78,7 +76,28 @@ public class EntityScaleCore {
 
         scalingAPI = new ScalingAPIImpl(server, new ScalingCalculator());
 
+        com.omuraisu.entityscalecore.api.EntityScaleCoreAPI.setInstance(scalingAPI);
+
+        Path coreJsonPath = FMLPaths.CONFIGDIR.get().resolve("core_manager.json");
+        com.omuraisu.entityscalecore.config.CoreJsonLoader.loadAndRegister(
+                coreJsonPath,
+                scalingAPI.getCoreManager(),
+                config.enableLoadingLog
+        );
+
         originManager.registerInitialOrigin(overworld, overworld.getSharedSpawnPos());
+    }
+
+    @SubscribeEvent
+    public void onRegisterCommands(RegisterCommandsEvent event) {
+        CommandManager.register(
+                event.getDispatcher(),
+                FMLPaths.CONFIGDIR.get(),
+                MobEliteScaling::setConfig,
+                () -> {
+                    return EntityScaleCore.getInstance().getConfig();
+                }
+        );
     }
 
     public void applyMobScaling(Mob mob, ServerLevel level) {

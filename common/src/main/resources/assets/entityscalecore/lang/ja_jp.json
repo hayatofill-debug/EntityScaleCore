@@ -1,8 +1,6 @@
 {
   "modmenu.nameTranslation.entityscalecore": "EntityScaleCore",
   "modmenu.descriptionTranslation.entityscalecore": "距離・日数・深さ・エリアなどに応じてMobの強さを変化させる難易度スケーリングMODです。",
-  "mod.entityscalecore.description": "距離・日数・深さ・エリアなどに応じてMobの強さを変化させる難易度スケーリングMODです。",
-  "${description}": "距離・日数・深さ・エリアなどに応じてMobの強さを変化させる難易度スケーリングMODです。",
 
   "config.entityscalecore.title": "EntityScaleCore 設定",
 
@@ -28,5 +26,16 @@
   "config.entityscalecore.elite.name_color_enabled": "強化Mobの名前色を有効化",
   "config.entityscalecore.elite.name_color": "強化Mobの名前色",
 
-  "entity.entityscalecore.elite": "強化された%s"
+  "entity.entityscalecore.elite": "強化された%s",
+
+  "commands.entityscalecore.reload.success": "§a[EntityScaleCore] 設定ファイルの再読み込みに成功しました。",
+  "commands.entityscalecore.reload.failure": "§c[EntityScaleCore] 設定ファイルの再読み込みに失敗しました。",
+  "commands.entityscalecore.error.player_only": "§cこのコマンドはゲーム内のプレイヤーのみ実行できます。",
+  "commands.entityscalecore.error.api_not_initialized": "§cAPIが初期化されていません。",
+  "commands.entityscalecore.info.header": "§e--- EntityScaleCore 情報 ---",
+  "commands.entityscalecore.info.dimension": "§7ディメンション: §f%s",
+  "commands.entityscalecore.info.distance": "§7中心からの距離: §f%.2f ブロック (Y重み適用: %.2f, 深さ: %.2f)",
+  "commands.entityscalecore.info.area": "§7適用エリアID: §a%s §7(タイプ: §b%s§7)",
+  "commands.entityscalecore.info.area_none": "§7適用エリア: §8なし (通常エリア)",
+  "commands.entityscalecore.info.multiplier": "§7最終倍率: §6x%.2f"
 }

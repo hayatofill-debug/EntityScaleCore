@@ -1,7 +1,6 @@
 package com.omuraisu.entityscalecore.area;
 
 import com.omuraisu.entityscalecore.api.AreaHandle;
-
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 
@@ -45,5 +44,14 @@ public class AreaHandleImpl implements AreaHandle {
     @Override
     public boolean isValid() {
         return valid;
+    }
+
+    @Override
+    public boolean contains(int x, int y, int z) {
+        if (!valid) {
+            return false;
+        }
+        Area area = areaManager.getArea(dimension, id);
+        return area != null && area.contains(x, y, z);
     }
 }

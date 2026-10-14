@@ -1,10 +1,6 @@
 package com.omuraisu.entityscalecore;
 
-import com.omuraisu.entityscalecore.api.AreaHandle;
-import com.omuraisu.entityscalecore.api.MobScaleContext;
-import com.omuraisu.entityscalecore.api.MobScaleResult;
-import com.omuraisu.entityscalecore.api.ScaleModifier;
-import com.omuraisu.entityscalecore.api.ScalingAPI;
+import com.omuraisu.entityscalecore.api.*;
 import com.omuraisu.entityscalecore.area.Area;
 import com.omuraisu.entityscalecore.area.AreaHandleImpl;
 import com.omuraisu.entityscalecore.area.AreaManager;
@@ -194,7 +190,11 @@ public class ScalingAPIImpl implements ScalingAPI {
                 area.id()
         );
 
-        if (coreType == CoreType.SAFE) {
+        if (coreType == null) {
+            coreType = CoreType.NORMAL;
+        }
+
+        if (coreType.isSuppressed()) {
             return new MobScaleResult(
                     1.0,
                     true,
@@ -203,7 +203,7 @@ public class ScalingAPIImpl implements ScalingAPI {
             );
         }
 
-        if (coreType == CoreType.RAGE) {
+        if (coreType.isForced()) {
             return new MobScaleResult(
                     multiplier,
                     false,
@@ -221,6 +221,11 @@ public class ScalingAPIImpl implements ScalingAPI {
     }
 
     @Override
+    public CoreManager getCoreManager() {
+        return this.coreManager;
+    }
+
+    @Override
     @Nullable
     public BlockPos getOrigin(ResourceKey<Level> dimension) {
         return OriginManager.get(this.server).getOrigin(dimension);
@@ -229,5 +234,10 @@ public class ScalingAPIImpl implements ScalingAPI {
     @Override
     public Map<ResourceKey<Level>, BlockPos> getOrigins() {
         return OriginManager.get(this.server).getOrigins();
+    }
+
+    @Override
+    public ScalingBreakdown getBreakdown(MobScaleContext context) {
+        return null;
     }
 }

@@ -2,12 +2,14 @@ package com.omuraisu.entityscalecore;
 
 import com.omuraisu.entityscalecore.api.MobScaleContext;
 import com.omuraisu.entityscalecore.api.MobScaleResult;
+import com.omuraisu.entityscalecore.command.CommandManager;
 import com.omuraisu.entityscalecore.config.ScalingConfig;
 import com.omuraisu.entityscalecore.config.ScalingConfigManager;
 import com.omuraisu.entityscalecore.dimension.OriginManager;
 import com.omuraisu.entityscalecore.fabric.FabricMobScalingPlatform;
 import com.omuraisu.entityscalecore.scaling.*;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.level.ServerLevel;
@@ -52,10 +54,30 @@ public class EntityScaleCore implements ModInitializer {
 
             scalingAPI = new ScalingAPIImpl(server, new ScalingCalculator());
 
+            com.omuraisu.entityscalecore.api.EntityScaleCoreAPI.setInstance(scalingAPI);
+
+            Path coreJsonPath = FabricLoader.getInstance().getConfigDir().resolve("core_manager.json");
+            com.omuraisu.entityscalecore.config.CoreJsonLoader.loadAndRegister(
+                    coreJsonPath,
+                    scalingAPI.getCoreManager(),
+                    config.enableLoadingLog
+            );
+
             originManager.registerInitialOrigin(overworld, overworld.getSharedSpawnPos());
         });
 
         mobScaler = new MobScaler(new FabricMobScalingPlatform());
+
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+            CommandManager.register(
+                    dispatcher,
+                    FabricLoader.getInstance().getConfigDir(),
+                    MobEliteScaling::setConfig,
+                    () -> {
+                        return EntityScaleCore.getInstance().getConfig();
+                    }
+            );
+        });
     }
 
     public void applyMobScaling(Mob mob, ServerLevel level) {

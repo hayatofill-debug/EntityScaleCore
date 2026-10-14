@@ -26,5 +26,16 @@
   "config.entityscalecore.elite.name_color_enabled": "Enable Elite Name Color",
   "config.entityscalecore.elite.name_color": "Elite Name Color",
 
-  "entity.entityscalecore.elite": "Strengthened %s"
+  "entity.entityscalecore.elite": "Strengthened %s",
+
+  "commands.entityscalecore.reload.success": "§a[EntityScaleCore] Successfully reloaded configuration files.",
+  "commands.entityscalecore.reload.failure": "§c[EntityScaleCore] Failed to reload configuration files.",
+  "commands.entityscalecore.error.player_only": "§cThis command can only be executed by players in-game.",
+  "commands.entityscalecore.error.api_not_initialized": "§cAPI is not initialized.",
+  "commands.entityscalecore.info.header": "§e--- EntityScaleCore Info ---",
+  "commands.entityscalecore.info.dimension": "§7Dimension: §f%s",
+  "commands.entityscalecore.info.distance": "§7Distance from origin: §f%.2f blocks (Y-weighted: %.2f, Depth: %.2f)",
+  "commands.entityscalecore.info.area": "§7Applied Area ID: §a%s §7(Type: §b%s§7)",
+  "commands.entityscalecore.info.area_none": "§7Applied Area: §8None (Normal Area)",
+  "commands.entityscalecore.info.multiplier": "§7Final Multiplier: §6x%.2f"
 }

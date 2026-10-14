@@ -8,6 +8,7 @@
         "${mod_author}"
     ],
     "contact": {
+        "sources": "https://github.com/hayatofill-debug/EntityScaleCore"
     },
     "license": "${license}",
     "icon": "assets/${mod_id}/${mod_id}.png",

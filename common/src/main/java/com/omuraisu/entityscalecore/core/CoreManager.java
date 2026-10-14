@@ -22,9 +22,9 @@ public class CoreManager {
         this.scalingAPI = scalingAPI;
     }
 
-    @SuppressWarnings("unused")
     public void registerCoreArea(
             ResourceKey<Level> dimension, BlockPos corePosition, String areaId,
+            CoreType coreType,
             int minX, int maxX, int minZ, int maxZ, int minY, int maxY,
             double multiplier, int priority
     ) {
@@ -34,88 +34,56 @@ public class CoreManager {
         );
 
         coreAreas.computeIfAbsent(dimension, key -> new HashMap<>()).put(corePosition, handle);
-        coreTypes.computeIfAbsent(dimension, key -> new HashMap<>()).put(corePosition, CoreType.NORMAL);
+        coreTypes.computeIfAbsent(dimension, key -> new HashMap<>()).put(corePosition, coreType);
     }
 
-    @SuppressWarnings("unused")
     public void registerSafeCore(
             ResourceKey<Level> dimension, BlockPos corePosition, String areaId,
             int minX, int maxX, int minZ, int maxZ, int minY, int maxY, int priority
     ) {
-        SafeCoreData data = new SafeCoreData(1.0, priority);
-
-        AreaHandle handle = scalingAPI.registerArea(
-                dimension, areaId, minX, maxX, minZ, maxZ, minY, maxY,
-                data.multiplier(), data.priority(), List.of()
-        );
-
-        coreAreas.computeIfAbsent(dimension, key -> new HashMap<>()).put(corePosition, handle);
-        coreTypes.computeIfAbsent(dimension, key -> new HashMap<>()).put(corePosition, CoreType.SAFE);
+        registerCoreArea(dimension, corePosition, areaId, CoreType.SAFE, minX, maxX, minZ, maxZ, minY, maxY, 1.0, priority);
     }
 
-    @SuppressWarnings("unused")
     public void registerRageCore(
             ResourceKey<Level> dimension, BlockPos corePosition, String areaId,
             int minX, int maxX, int minZ, int maxZ, int minY, int maxY,
             double multiplier, int priority
     ) {
-        RageCoreData data = new RageCoreData(multiplier, priority);
-
-        AreaHandle handle = scalingAPI.registerArea(
-                dimension, areaId, minX, maxX, minZ, maxZ, minY, maxY,
-                data.multiplier(), data.priority(), List.of()
-        );
-
-        coreAreas.computeIfAbsent(dimension, key -> new HashMap<>()).put(corePosition, handle);
-        coreTypes.computeIfAbsent(dimension, key -> new HashMap<>()).put(corePosition, CoreType.RAGE);
+        registerCoreArea(dimension, corePosition, areaId, CoreType.RAGE, minX, maxX, minZ, maxZ, minY, maxY, multiplier, priority);
     }
 
-    @SuppressWarnings("unused")
     public boolean removeCoreArea(ResourceKey<Level> dimension, BlockPos corePosition) {
         Map<BlockPos, AreaHandle> dimensionAreas = coreAreas.get(dimension);
-
-        if (dimensionAreas == null) {
-            return false;
-        }
+        if (dimensionAreas == null) return false;
 
         AreaHandle handle = dimensionAreas.remove(corePosition);
         Map<BlockPos, CoreType> dimensionTypes = coreTypes.get(dimension);
 
         if (dimensionTypes != null) {
             dimensionTypes.remove(corePosition);
-            if (dimensionTypes.isEmpty()) {
-                coreTypes.remove(dimension);
-            }
+            if (dimensionTypes.isEmpty()) coreTypes.remove(dimension);
         }
 
-        if (handle == null) {
-            return false;
-        }
+        if (handle == null) return false;
 
         handle.remove();
-
-        if (dimensionAreas.isEmpty()) {
-            coreAreas.remove(dimension);
-        }
+        if (dimensionAreas.isEmpty()) coreAreas.remove(dimension);
 
         return true;
     }
 
     @Nullable
-    @SuppressWarnings("unused")
     public AreaHandle getArea(ResourceKey<Level> dimension, BlockPos corePosition) {
         Map<BlockPos, AreaHandle> dimensionAreas = coreAreas.get(dimension);
         return dimensionAreas != null ? dimensionAreas.get(corePosition) : null;
     }
 
-    @SuppressWarnings("unused")
     public boolean hasCore(ResourceKey<Level> dimension, BlockPos corePosition) {
         Map<BlockPos, AreaHandle> dimensionAreas = coreAreas.get(dimension);
         return dimensionAreas != null && dimensionAreas.containsKey(corePosition);
     }
 
     @Nullable
-    @SuppressWarnings("unused")
     public CoreType getCoreType(ResourceKey<Level> dimension, BlockPos corePosition) {
         Map<BlockPos, CoreType> dimensionTypes = coreTypes.get(dimension);
         return dimensionTypes != null ? dimensionTypes.get(corePosition) : null;
@@ -124,14 +92,10 @@ public class CoreManager {
     @Nullable
     public CoreType getCoreTypeByAreaId(ResourceKey<Level> dimension, String areaId) {
         Map<BlockPos, AreaHandle> dimensionAreas = coreAreas.get(dimension);
-        if (dimensionAreas == null) {
-            return null;
-        }
+        if (dimensionAreas == null) return null;
 
         Map<BlockPos, CoreType> dimensionTypes = coreTypes.get(dimension);
-        if (dimensionTypes == null) {
-            return null;
-        }
+        if (dimensionTypes == null) return null;
 
         for (Map.Entry<BlockPos, AreaHandle> entry : dimensionAreas.entrySet()) {
             if (entry.getValue().id().equals(areaId)) {

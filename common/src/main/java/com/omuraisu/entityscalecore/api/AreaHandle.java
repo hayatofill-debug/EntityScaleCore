@@ -7,4 +7,6 @@ public interface AreaHandle {
     void remove();
 
     boolean isValid();
+
+    boolean contains(int x, int y, int z);
 }

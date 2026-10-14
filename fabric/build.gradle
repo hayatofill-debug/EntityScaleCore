@@ -10,13 +10,11 @@ dependencies {
     }
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
-    implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
+    implementation "com.google.code.findbugs:jsr305:3.0.1"
     implementation project(":common")
 
-    // --- MOD 依存関係 ---
     modImplementation "curse.maven:cloth-config-348521:5729104"
 
-    // ★ 正しい Group ID と Artifact ID に変更
     modImplementation "me.shedaniel.cloth:basic-math:0.6.1"
     include "me.shedaniel.cloth:basic-math:0.6.1"
 
