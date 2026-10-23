@@ -292,6 +292,7 @@ public class EntityScaleCoreConfigScreen {
                     net.fabricmc.loader.api.FabricLoader
                             .getInstance()
                             .getConfigDir()
+                            .resolve("entityscale")
                             .resolve("entityscalecore.json");
 
             com.omuraisu.entityscalecore.config.ScalingConfigManager.save(

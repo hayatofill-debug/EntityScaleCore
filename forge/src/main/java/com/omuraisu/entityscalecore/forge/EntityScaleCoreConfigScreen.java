@@ -288,11 +288,12 @@ public class EntityScaleCoreConfigScreen {
                         )
                         .build()
         );
-
-        // ★ 修正箇所：FabricLoader から Forge 用の FMLPaths に置き換え
+        
         builder.setSavingRunnable(() -> {
             java.nio.file.Path configPath =
-                    FMLPaths.CONFIGDIR.get().resolve("entityscalecore.json");
+                    FMLPaths.CONFIGDIR.get()
+                            .resolve("entityscale")
+                            .resolve("entityscalecore.json");
 
             ScalingConfigManager.save(
                     configPath,

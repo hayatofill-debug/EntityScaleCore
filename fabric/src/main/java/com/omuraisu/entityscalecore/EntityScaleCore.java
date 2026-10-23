@@ -42,7 +42,9 @@ public class EntityScaleCore implements ModInitializer {
     public void onInitialize() {
         CommonClass.init();
 
-        Path configPath = FabricLoader.getInstance().getConfigDir().resolve("entityscalecore.json");
+        Path modConfigDir = FabricLoader.getInstance().getConfigDir().resolve("entityscale");
+
+        Path configPath = modConfigDir.resolve("entityscalecore.json");
         config = ScalingConfigManager.load(configPath);
 
         MobEliteScaling.setConfig(config);
@@ -56,7 +58,7 @@ public class EntityScaleCore implements ModInitializer {
 
             com.omuraisu.entityscalecore.api.EntityScaleCoreAPI.setInstance(scalingAPI);
 
-            Path coreJsonPath = FabricLoader.getInstance().getConfigDir().resolve("core_manager.json");
+            Path coreJsonPath = modConfigDir.resolve("core_manager.json");
             com.omuraisu.entityscalecore.config.CoreJsonLoader.loadAndRegister(
                     coreJsonPath,
                     scalingAPI.getCoreManager(),
@@ -71,11 +73,9 @@ public class EntityScaleCore implements ModInitializer {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             CommandManager.register(
                     dispatcher,
-                    FabricLoader.getInstance().getConfigDir(),
+                    modConfigDir,
                     MobEliteScaling::setConfig,
-                    () -> {
-                        return EntityScaleCore.getInstance().getConfig();
-                    }
+                    () -> EntityScaleCore.getInstance().getConfig()
             );
         });
     }

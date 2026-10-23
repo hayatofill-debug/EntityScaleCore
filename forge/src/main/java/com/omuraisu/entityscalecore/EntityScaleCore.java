@@ -39,7 +39,9 @@ public class EntityScaleCore {
 
         CommonClass.init();
 
-        Path configPath = FMLPaths.CONFIGDIR.get().resolve("entityscalecore.json");
+        Path modConfigDir = FMLPaths.CONFIGDIR.get().resolve("entityscale");
+
+        Path configPath = modConfigDir.resolve("entityscalecore.json");
         config = ScalingConfigManager.load(configPath);
 
         MobEliteScaling.setConfig(config);
@@ -70,7 +72,7 @@ public class EntityScaleCore {
     @SubscribeEvent
     public void onServerStarted(ServerStartedEvent event) {
         var server = event.getServer();
-        var overworld = server.overworld();
+        ServerLevel overworld = server.overworld();
 
         originManager = OriginManager.get(server);
 
@@ -78,25 +80,28 @@ public class EntityScaleCore {
 
         com.omuraisu.entityscalecore.api.EntityScaleCoreAPI.setInstance(scalingAPI);
 
-        Path coreJsonPath = FMLPaths.CONFIGDIR.get().resolve("core_manager.json");
+        Path modConfigDir = FMLPaths.CONFIGDIR.get().resolve("entityscale");
+        Path coreJsonPath = modConfigDir.resolve("core_manager.json");
         com.omuraisu.entityscalecore.config.CoreJsonLoader.loadAndRegister(
                 coreJsonPath,
                 scalingAPI.getCoreManager(),
                 config.enableLoadingLog
         );
 
-        originManager.registerInitialOrigin(overworld, overworld.getSharedSpawnPos());
+        originManager.registerInitialOrigin(
+                overworld,
+                overworld.getSharedSpawnPos()
+        );
     }
 
     @SubscribeEvent
     public void onRegisterCommands(RegisterCommandsEvent event) {
+        Path modConfigDir = FMLPaths.CONFIGDIR.get().resolve("entityscale");
         CommandManager.register(
                 event.getDispatcher(),
-                FMLPaths.CONFIGDIR.get(),
+                modConfigDir,
                 MobEliteScaling::setConfig,
-                () -> {
-                    return EntityScaleCore.getInstance().getConfig();
-                }
+                () -> EntityScaleCore.getInstance().getConfig()
         );
     }
 
