@@ -1,4 +1,5 @@
 # EntityScaleCore
+下記に記述する計算式に沿ってMOBを強化します
 ## 📊 難易度倍率の計算式 (Difficulty Multiplier Calculation)
 
 MOBの最終的な難易度倍率は、距離、経過日数、深さ（高度）などのボーナスを合算し、エリア倍率を乗算して算出されます[cite: 4, 6]。
@@ -23,6 +24,6 @@ $$\text{Final Multiplier} = (1 + \text{Distance Bonus} + \text{Day Bonus} + \tex
 * **Depth Bonus** = `0.3`
 * **Area Multiplier** = `1.5`
 
-$$(1 + 2.0 + 0.5 + 0.3) \times 1.5 = 3.8 \times 1.5 = 5.7\times$$
+$$(1 + 2.0 + 0.5 + 0.3) \times 1.5 = 3.8 \times 1.5 = \times5.7$$
 
-最終的なMOBの難易度倍率は **$5.7\times$** になります。
+最終的なMOBの難易度倍率は **$\times5.7$** になります。
