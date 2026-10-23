@@ -1,3 +1,4 @@
+[![CurseForge Downloads](https://img.shields.io/curseforge/dt/1724092?logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/entityscalecore)
 # EntityScaleCore
 下記に記述する計算式に沿ってMOBを強化します
 ## 📊 難易度倍率の計算式 (Difficulty Multiplier Calculation)
@@ -24,6 +25,6 @@ $$\text{Final Multiplier} = (1 + \text{Distance Bonus} + \text{Day Bonus} + \tex
 * **Depth Bonus** = `0.3`
 * **Area Multiplier** = `1.5`
 
-$$(1 + 2.0 + 0.5 + 0.3) \times 1.5 = 3.8 \times 1.5 = \times5.7$$
+$$(1 + 2.0 + 0.5 + 0.3) \times 1.5 = 3.8 \times 1.5 = 5.7$$
 
-最終的なMOBの難易度倍率は **$\times5.7$** になります。
+最終的なMOBの難易度倍率は **5.7倍**（$5.7\times$）になります。
