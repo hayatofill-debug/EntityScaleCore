@@ -1,5 +1,5 @@
-[![CurseForge Downloads](https://img.shields.io/curseforge/dt/1724092?logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/entityscalecore)
 # EntityScaleCore
+[![CurseForge Downloads](https://img.shields.io/curseforge/dt/1724092?logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/entityscalecore)
 下記に記述する計算式に沿ってMOBを強化します
 ## 📊 難易度倍率の計算式 (Difficulty Multiplier Calculation)
 
